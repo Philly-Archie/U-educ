@@ -42,7 +42,7 @@ def signup(request):
 
     return render(request, "auth/signup.html", context)
 
-def loginPage(request):
+def loginUser(request):
     context = {
         'username' : '',
         'password' : ''
@@ -68,7 +68,7 @@ def loginPage(request):
 
     return render(request, "auth/login.html", context)
 
-def logout(request):
+def logoutUser(request):
     logout(request)
     return redirect('login')
 
