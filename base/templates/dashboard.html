@@ -12,13 +12,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
+                      <i class="fa fa-user-circle text-warning"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Capacity</p>
-                      <p class="card-title">150GB<p>
+                      <p class="card-category">My Mappings</p>
+                      <p class="card-title">0<p>
                     </div>
                   </div>
                 </div>
@@ -26,8 +26,8 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update Now
+                  <i class="fa fa-user"></i>
+                  Student Mappings
                 </div>
               </div>
             </div>
@@ -43,8 +43,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Revenue</p>
-                      <p class="card-title">$ 1,345<p>
+                      <p class="card-category">Donations</p>
+                      <p class="card-title">$ 0<p>
                     </div>
                   </div>
                 </div>
@@ -52,8 +52,8 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-calendar-o"></i>
-                  Last day
+                  <i class="nc-icon nc-money-coins"></i>
+                  Current Amount
                 </div>
               </div>
             </div>
@@ -64,13 +64,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-vector text-danger"></i>
+                      <i class="fa fa-hourglass-half text-danger"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Errors</p>
-                      <p class="card-title">23<p>
+                      <p class="card-category">Pending</p>
+                      <p class="card-title">0<p>
                     </div>
                   </div>
                 </div>
@@ -78,8 +78,8 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-clock-o"></i>
-                  In the last hour
+                  <i class="fa fa-hourglass"></i>
+                  Pending Donations
                 </div>
               </div>
             </div>
@@ -95,8 +95,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Followers</p>
-                      <p class="card-title">+45K<p>
+                      <p class="card-category">Badges</p>
+                      <p class="card-title">0<p>
                     </div>
                   </div>
                 </div>
@@ -104,14 +104,14 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update now
+                  <i class="fa fa-bell"></i>
+                  Your Badges
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header ">
@@ -129,32 +129,172 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="row">
+
           <div class="col-md-4">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Email Statistics</h5>
-                <p class="card-category">Last Campaign Performance</p>
+            <div class="card card-user">
+              <div class="image">
+                <img src="{{ random_image_url }}" alt="...">
               </div>
-              <div class="card-body ">
-                <canvas id="chartEmail"></canvas>
-              </div>
-              <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-primary"></i> Opened
-                  <i class="fa fa-circle text-warning"></i> Read
-                  <i class="fa fa-circle text-danger"></i> Deleted
-                  <i class="fa fa-circle text-gray"></i> Unopened
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="{% static 'home/img/mike.jpg' %}" alt="...">
+                    <h5 class="title">Chet Faker</h5>
+                  </a>
+                  <p class="description">
+                    @chetfaker
+                  </p>
                 </div>
+                <p class="description text-center">
+                  "I like the way you work it <br>
+                  No diggity <br>
+                  I wanna bag it up"
+                </p>
+              </div>
+              <div class="card-footer">
                 <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar"></i> Number of emails sent
+                <div class="button-container">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                      <h5>12<br><small>Files</small></h5>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                      <h5>2GB<br><small>Used</small></h5>
+                    </div>
+                    <div class="col-lg-3 mr-auto">
+                      <h5>24,6$<br><small>Spent</small></h5>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-8">
+
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="image">
+                <img src="{{ random_image_url }}" alt="...">
+              </div>
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="{% static 'home/img/mike.jpg' %}" alt="...">
+                    <h5 class="title">Chet Faker</h5>
+                  </a>
+                  <p class="description">
+                    @chetfaker
+                  </p>
+                </div>
+                <p class="description text-center">
+                  "I like the way you work it <br>
+                  No diggity <br>
+                  I wanna bag it up"
+                </p>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="button-container">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                      <h5>12<br><small>Files</small></h5>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                      <h5>2GB<br><small>Used</small></h5>
+                    </div>
+                    <div class="col-lg-3 mr-auto">
+                      <h5>24,6$<br><small>Spent</small></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="image">
+                <img src="{% static 'home/img/damir-bosnjak.jpg' %}" alt="...">
+              </div>
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="{% static 'home/img/mike.jpg' %}" alt="...">
+                    <h5 class="title">Chet Faker</h5>
+                  </a>
+                  <p class="description">
+                    @chetfaker
+                  </p>
+                </div>
+                <p class="description text-center">
+                  "I like the way you work it <br>
+                  No diggity <br>
+                  I wanna bag it up"
+                </p>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="button-container">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                      <h5>12<br><small>Files</small></h5>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                      <h5>2GB<br><small>Used</small></h5>
+                    </div>
+                    <div class="col-lg-3 mr-auto">
+                      <h5>24,6$<br><small>Spent</small></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="image">
+                <img src="{% static 'home/img/damir-bosnjak.jpg' %}" alt="...">
+              </div>
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="{% static 'home/img/mike.jpg' %}" alt="...">
+                    <h5 class="title">Chet Faker</h5>
+                  </a>
+                  <p class="description">
+                    @chetfaker
+                  </p>
+                </div>
+                <p class="description text-center">
+                  "I like the way you work it <br>
+                  No diggity <br>
+                  I wanna bag it up"
+                </p>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="button-container">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                      <h5>12<br><small>Files</small></h5>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                      <h5>2GB<br><small>Used</small></h5>
+                    </div>
+                    <div class="col-lg-3 mr-auto">
+                      <h5>24,6$<br><small>Spent</small></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <!-- <div class="col-md-8">
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-title">NASDAQ: AAPL</h5>
@@ -174,28 +314,8 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
-      <footer class="footer footer-black  footer-white ">
-        <div class="container-fluid">
-          <div class="row">
-            <nav class="footer-nav">
-              <ul>
-                <li><a href="https://www.creative-tim.com" target="_blank">Creative Tim</a></li>
-                <li><a href="https://www.creative-tim.com/blog" target="_blank">Blog</a></li>
-                <li><a href="https://www.creative-tim.com/license" target="_blank">Licenses</a></li>
-              </ul>
-            </nav>
-            <div class="credits ml-auto">
-              <span class="copyright">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
 {% endblock %}
