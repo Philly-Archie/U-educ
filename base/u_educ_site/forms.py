@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from dataclasses import field
 from django.forms import ModelForm
 
-from .models import Role
+from .models import Role, SponsorPreferences
 
 
 # Adding form data from here
@@ -21,4 +21,9 @@ class SignupForm(UserCreationForm):
 class RoleForm(ModelForm):
     class Meta:
         model = Role
+        fields = '__all__'
+
+class SponsorPreferencesForm(ModelForm):
+    class Meta:
+        model = SponsorPreferences
         fields = '__all__'
