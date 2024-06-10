@@ -3,6 +3,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import random
 
 from .forms import SignupForm, RoleForm
 
@@ -74,7 +75,19 @@ def logoutUser(request):
 
 @login_required(login_url='/login')
 def home(request):
-    return render(request, "dashboard.html")
+    image_urls = [
+        '/static/home/img/bg4.jpg',
+        '/static/home/img/bg3.jpg',
+        '/static/home/img/bg1.jpg',
+        '/static/home/img/bg2.jpg',
+    ]
+    
+    random_image_url = random.choice(image_urls)
+    
+    context = {
+        'random_image_url': random_image_url,
+    }
+    return render(request, "dashboard.html", context)
 
 @login_required(login_url='/login')
 def profile(request):
