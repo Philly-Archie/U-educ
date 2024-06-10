@@ -90,6 +90,10 @@ def home(request):
     return render(request, "dashboard.html", context)
 
 @login_required(login_url='/login')
+def sponsorPreferences(request):
+    return render(request, "sponsor_preferences.html" )
+
+@login_required(login_url='/login')
 def profile(request):
     return render(request, "profile.html")
 
