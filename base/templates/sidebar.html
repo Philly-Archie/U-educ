@@ -21,8 +21,8 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="{% if request.resolver_match.url_name == 'mappings' %}active{% endif %}">
-              <a href="#">
+            <li class="{% if request.resolver_match.url_name == 'sponsor_preferences' %}active{% endif %}">
+              <a href="{% url 'sponsor_preferences' %}">
                 <i class="nc-icon nc-diamond"></i>
                 <p>Mappings</p>
               </a>
