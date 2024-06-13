@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import random
 
-from .forms import SignupForm, RoleForm
+from .forms import SignupForm, RoleForm, SponsorPreferencesForm
 
 # Create your views here.
 
@@ -37,7 +37,7 @@ def signup(request):
 
             if new_user is not None:
                 login(request, new_user)
-                return redirect("home")
+                return redirect("sponsor_preferences")
         else:
             messages.error(request, form.errors)
 
@@ -89,9 +89,26 @@ def home(request):
     }
     return render(request, "dashboard.html", context)
 
+
 @login_required(login_url='/login')
 def sponsorPreferences(request):
-    return render(request, "sponsor_preferences.html" )
+    if request.method == 'POST':
+        form = SponsorPreferencesForm(request.POST)
+        if form.is_valid():
+            print("Hello")
+            form.save()
+            return redirect('home')
+    else:
+        form = SponsorPreferencesForm()
+        messages.error(request, "Error submitting the form")
+        print(form.errors)
+    
+    context = {
+        'form' : form
+    }
+
+    return render(request, "sponsor_preferences.html" , context)
+
 
 @login_required(login_url='/login')
 def profile(request):
