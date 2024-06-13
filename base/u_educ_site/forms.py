@@ -26,4 +26,8 @@ class RoleForm(ModelForm):
 class SponsorPreferencesForm(ModelForm):
     class Meta:
         model = SponsorPreferences
-        fields = '__all__'
+        fields = [
+            'firstName', 'lastName', 'email', 'phoneNumber', 'address',
+            'city', 'state', 'country', 'zipCode', 'preferred_student_gender',
+            'preferred_student_courses', 'tuition_amount_min', 'tuition_amount_max'
+        ]
