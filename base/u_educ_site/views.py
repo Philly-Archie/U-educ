@@ -86,6 +86,7 @@ def home(request):
     
     context = {
         'random_image_url': random_image_url,
+        'page_title': 'U-EDUC Sponsor Dashboard',
     }
     return render(request, "dashboard.html", context)
 
@@ -104,7 +105,8 @@ def sponsorPreferences(request):
         print(form.errors)
     
     context = {
-        'form' : form
+        'form' : form,
+        'inactive_sidebar': True,
     }
 
     return render(request, "sponsor_preferences.html" , context)
@@ -112,7 +114,19 @@ def sponsorPreferences(request):
 
 @login_required(login_url='/login')
 def profile(request):
-    return render(request, "profile.html")
+    my_image_urls = [
+        '/static/home/img/bg4.jpg',
+        '/static/home/img/bg3.jpg',
+        '/static/home/img/bg1.jpg',
+        '/static/home/img/bg2.jpg',
+    ]
+    my_random_image_url = random.choice(my_image_urls)
+    
+    context = {
+        'my_random_image_url': my_random_image_url,
+        'page_title': "Sponsor's Profile",
+    }
+    return render(request, "profile.html", context)
 
 @login_required(login_url='/login')
 def mappings(request):
