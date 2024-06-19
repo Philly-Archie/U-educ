@@ -1,6 +1,6 @@
 {% load static %}
 
-    <div class="main-panel">
+    <div class="main-panel {% if inactive_sidebar %}inactive{% endif %}">
     <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
         <div class="container-fluid">
@@ -12,7 +12,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="{% url 'home' %}">U-EDUC Sponsor Dashboard</a>
+            <a class="navbar-brand" href="{% url 'home' %}">{{ page_title }}</a>
           </div>
 
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
