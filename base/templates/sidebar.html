@@ -1,12 +1,11 @@
 {% load static %}
 
-    <div class="sidebar" data-color="white" data-active-color="danger">
+    <div class="sidebar {% if inactive_sidebar %}inactive{% endif %}" data-color="white" data-active-color="danger">
         <div class="logo">
           <a href="{% url 'home' %}" class="simple-text logo-mini">
             <div class="logo-image-small">
               <img src="{% static 'home/img/logo-small.png' %}">
             </div>
-            <!-- <p>CT</p> -->
           </a>
           <a href="{% url 'home' %}" class="simple-text logo-normal">
             {{request.user}}
@@ -22,7 +21,7 @@
               </a>
             </li>
             <li class="{% if request.resolver_match.url_name == 'sponsor_preferences' %}active{% endif %}">
-              <a href="{% url 'sponsor_preferences' %}">
+              <a href="{% url 'mappings' %}">
                 <i class="nc-icon nc-diamond"></i>
                 <p>Mappings</p>
               </a>
