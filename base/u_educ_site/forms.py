@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from dataclasses import field
 from django.forms import ModelForm
 
-from .models import Role, SponsorPreferences
+from .models import Role, SponsorPreferences, Mappings
 
 
 # Adding form data from here
@@ -29,5 +29,10 @@ class SponsorPreferencesForm(ModelForm):
         fields = [
             'firstName', 'lastName', 'email', 'phoneNumber', 'address',
             'city', 'state', 'country', 'zipCode', 'preferred_student_gender',
-            'preferred_student_courses', 'tuition_amount_min', 'tuition_amount_max'
+            'preferred_student_courses', 'tuition_amount_min', 'tuition_amount_max', 'profileImage'
         ]
+
+class MappingsForm(ModelForm):
+    class Meta:
+        model = Mappings
+        fields = '__all__'
