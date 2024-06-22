@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <div class="card card-plain">
+              <div class="card-header">
+                <h4 class="card-title"> Pending Mapping Requests</h4>
+                <p class="card-category"> Below are the pending students you added</p>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Year Of Study</th>
+                                <th>Tution Amount</th>   
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dakota Rice</td>
+                                <td>Male</td>
+                                <td>One</td>
+                                <td>$2000</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Minerva Hooper</td>
+                                <td>Female</td>
+                                <td>Two</td>
+                                <td>$2000</td>
+                                <td>Rejected</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sage Rodriguez</td>
+                                <td>Male</td>
+                                <td>One</td>
+                                <td>$9000</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Philip Chaney</td>
+                                <td>Male</td>
+                                <td>Four</td>
+                                <td>$40000</td>
+                                <td>Rejected</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Doris Greene</td>
+                                <td>Female</td>
+                                <td>Three</td>
+                                <td>$14000</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mason Porter</td>
+                                <td>Male</td>
+                                <td>Three</td>
+                                <td>$1000</td>
+                                <td>Rejected</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jon Porter</td>
+                                <td>Male</td>
+                                <td>Three</td>
+                                <td>$420000</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+{% endblock %}
