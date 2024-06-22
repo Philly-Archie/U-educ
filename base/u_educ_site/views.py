@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import random
+from django.utils.text import slugify
 
 from .forms import SignupForm, RoleForm, SponsorPreferencesForm
+from .models import SponsorPreferences
 
 # Create your views here.
 
@@ -94,22 +96,28 @@ def home(request):
 @login_required(login_url='/login')
 def sponsorPreferences(request):
     if request.method == 'POST':
-        form = SponsorPreferencesForm(request.POST)
+        form = SponsorPreferencesForm(request.POST, request.FILES)
         if form.is_valid():
-            print("Hello")
-            form.save()
+            print(request.POST)
+            sponsor_preferences = form.save(commit=False)
+            sponsor_preferences.user = request.user
+            sponsor_preferences.calculate_weights()
+
+            sponsor_preferences.save()
             return redirect('home')
+        else:
+            print(form.errors)
+            messages.error(request, "Error submitting the form")
     else:
         form = SponsorPreferencesForm()
-        messages.error(request, "Error submitting the form")
-        print(form.errors)
     
     context = {
-        'form' : form,
+        'form': form,
         'inactive_sidebar': True,
     }
 
-    return render(request, "sponsor_preferences.html" , context)
+    return render(request, "sponsor_preferences.html", context)
+
 
 
 @login_required(login_url='/login')
@@ -121,17 +129,40 @@ def profile(request):
         '/static/home/img/bg2.jpg',
     ]
     my_random_image_url = random.choice(my_image_urls)
+
+    sponsor_preference = get_object_or_404(SponsorPreferences, user=request.user)
     
     context = {
         'my_random_image_url': my_random_image_url,
         'page_title': "Sponsor's Profile",
+        'sponsor_preference' : sponsor_preference,
     }
     return render(request, "profile.html", context)
 
-@login_required(login_url='/login')
-def mappings(request):
-    return render(request, "mapping.html")
+def editProfile(request):
+    sponsor_preference = get_object_or_404(SponsorPreferences, user=request.user)
+
+    if request.method == 'POST':
+        form = SponsorPreferencesForm(request.POST, request.FILES, instance=sponsor_preference)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        else:
+            print(form.errors)
+            messages.error(request, "Error submitting the form")
+        
+
 
 @login_required(login_url='/login')
-def donations(request):
-    return render(request, "donations.html")
+def mappings(request):
+    context ={
+        'page_title': "Active Sponsor's Mappings",
+    }
+    return render(request, "mappings.html", context)
+
+@login_required(login_url='/login')
+def mapRequests(request):
+    context = {
+        'page_title': 'Mapping Pending Requests'
+    }
+    return render(request, "map_requests.html", context)
