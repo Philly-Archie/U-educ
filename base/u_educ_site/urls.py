@@ -13,8 +13,9 @@ urlpatterns = [
 
     path('profile/', views.profile, name='profile'),
     path('mappings/', views.mappings, name='mappings'),
-    path('donations/', views.donations, name='donations'),
+    path('map_requests/', views.mapRequests, name='map_requests'),
     path('sponsor_preferences/', views.sponsorPreferences, name='sponsor_preferences'),
+    path('edit_profile/', views.editProfile, name='edit_profile'),
 
 
 
