@@ -20,16 +20,16 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="{% if request.resolver_match.url_name == 'sponsor_preferences' %}active{% endif %}">
+            <li class="{% if request.resolver_match.url_name == 'mappings' %}active{% endif %}">
               <a href="{% url 'mappings' %}">
-                <i class="nc-icon nc-diamond"></i>
+                <i class="nc-icon nc-money-coins"></i>
                 <p>Mappings</p>
               </a>
             </li>
-            <li class="{% if request.resolver_match.url_name == 'donations' %}active{% endif %}">
-              <a href="#">
-                <i class="nc-icon nc-pin-3"></i>
-                <p>Donations</p>
+            <li class="{% if request.resolver_match.url_name == 'map_requests' %}active{% endif %}">
+              <a href="{% url 'map_requests' %}">
+                <i class="fa fa-question-circle"></i>
+                <p>Mapping Requests</p>
               </a>
             </li>
             <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
@@ -40,7 +40,7 @@
             </li>
             <li>
               <a href="{% url 'logout' %}">
-                <i class="nc-icon nc-tile-56"></i>
+                <i class="nc-icon nc-user-run"></i>
                 <p>Logout</p>
               </a>
             </li>
