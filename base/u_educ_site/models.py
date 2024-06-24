@@ -71,7 +71,7 @@ class SponsorPreferences(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} ({self.email})'
+        return f'{self.firstName} {self.lastName} ({self.email})'
     
     def calculate_tuition_weight(self):
         if self.tuition_amount_min is not None and self.tuition_amount_max is not None:
@@ -106,3 +106,6 @@ class Mappings(models.Model):
     studentFullName = models.CharField(max_length=500)
     studentEmail = models.EmailField()
     studentPhoneNumber = models.CharField(max_length=15, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.sponsor} {self.studentFullName} {self.studentEmail}'
