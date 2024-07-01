@@ -26,7 +26,7 @@ class DetailsModel(models.Model):
         return f'{self.userId} {self.surname} {self.otherNames}'
 
 class FamEducationModel(models.Model):
-    userId = models.ForeignKey(DetailsModel, on_delete=models.CASCADE)
+    userId = models.TextField(max_length=200)
     fatherStatus = models.CharField(max_length=50)
     fatherSurname = models.CharField(max_length=100)
     fatherGivenName = models.CharField(max_length=100)
@@ -71,13 +71,3 @@ class FamEducationModel(models.Model):
     subsidiaryTwoPoints = models.CharField(max_length=10)
     totalPoints = models.CharField(max_length=10)
     pictureOfPassSlipUrl = models.URLField()
-
-
-    def save(self, *args, **kwargs):
-        if isinstance(self.related_model, str):
-            self.userId = DetailsModel.objects.get(pk=self.userId)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f'{self.userId}'
-
