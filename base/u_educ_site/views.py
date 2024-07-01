@@ -79,6 +79,8 @@ def logoutUser(request):
     return redirect('login')
 
 
+
+@login_required
 def home(request):
     # Fetch random image URL (replace with your actual logic to fetch random image)
     image_urls = [
@@ -89,73 +91,73 @@ def home(request):
     ]
     random_image_url = random.choice(image_urls)
 
-    # Retrieve users from UserModel where email matches with DetailsModel
+    sponsor_preferences = get_object_or_404(SponsorPreferences, user=request.user)
     users_with_details = UserModel.objects.filter(email__in=DetailsModel.objects.values('email'))
 
     # Combine data for each user
     combined_data = []
     for user in users_with_details:
-        # Retrieve DetailsModel instance based on email
         details_instance = DetailsModel.objects.get(email=user.email)
+        try:
+            education_instance = FamEducationModel.objects.get(userId=details_instance.userId)
+        except FamEducationModel.DoesNotExist:
+            education_instance = None
 
-        # Retrieve FamEducationModel instance associated with DetailsModel
-        education_instance = FamEducationModel.objects.get(userId=details_instance)
+        # if sponsor_preferences.preferred_student_gender != 'any' and details_instance.gender != sponsor_preferences.preferred_student_gender:
+        #     continue
+        # if sponsor_preferences.preferred_student_courses != 'any' and education_instance and education_instance.artsOrSciences != sponsor_preferences.preferred_student_courses:
+        #     continue
+        # if education_instance and sponsor_preferences.tuition_amount_min is not None and sponsor_preferences.tuition_amount_max is not None:
+        #     tuition = float(education_instance.tuitionAmountPerSemester)
+        #     if not (sponsor_preferences.tuition_amount_min <= tuition <= sponsor_preferences.tuition_amount_max):
+        #         continue
 
-        # Prepare combined data for the template
         combined_data.append({
             'user': user,
             'details': details_instance,
             'education': education_instance,
         })
 
+    # Sort the combined data, prioritizing those with guardian information
+    combined_data.sort(key=lambda x: (x['education'] is not None and x['education'].guardianSurname))
+
     context = {
         'random_image_url': random_image_url,
+        'page_title': "Sponsor's Dashboard",
         'combined_data': combined_data,
     }
 
-    return render(request, 'student_information.html', context)
+    return render(request, 'dashboard.html', context)
 
 
 
-
-
-# @login_required(login_url='/login')
-# def home(request):
-#     image_urls = [
-#         '/static/home/img/bg4.jpg',
-#         '/static/home/img/bg3.jpg',
-#         '/static/home/img/bg1.jpg',
-#         '/static/home/img/bg2.jpg',
-#     ]
+@login_required(login_url='/login')
+def addStudent(request, pk):
+    sponsor_preferences = get_object_or_404(SponsorPreferences, user=request.user)
+    student = get_object_or_404(UserModel, id=pk)
+    details_instance = get_object_or_404(DetailsModel, email=student.email)
     
-#     random_image_url = random.choice(image_urls)
-#     users = UserModel.objects.exclude(fullName__isnull=True).exclude(fullName='')
-#     user_details = DetailsModel.objects.all()
-#     user_educations = FamEducationModel.objects.all()
+    try:
+        education_instance = FamEducationModel.objects.get(userId=details_instance.userId)
+    except FamEducationModel.DoesNotExist:
+        education_instance = None
 
-#     combined_data = []
+    if request.method == 'POST':
+        # Here you can perform actions to add the student
+        # For example, you might create a relationship between the sponsor and the student
+        # sponsor_preferences.students.add(student) # or any other relevant action
+        return redirect('home')
 
-#     for user in users:
-#         details = user_details.filter(userId=user.id).first()
-#         if not details:
-#             details = user_details.filter(email=user.email).first()
-#             if not details:
-#                 details = user_details.filter(surname=user.fullName.split()[0]).first()
+    context = {
+        'student': student,
+        'details': details_instance,
+        'sponsor_preferences' : sponsor_preferences,
+        'education': education_instance,
+        'student_matches': True,
+        'page_title': 'Add Student',
+    }
 
-#         education = user_educations.filter(userId=user.id).first()
-        
-#         combined_data.append({
-#             'user': user,
-#             'details': details,
-#             'education': education,
-#         })
-    
-#     context = {
-#         'random_image_url': random_image_url,
-#         'page_title': 'U-EDUC Sponsor Dashboard',
-#         'combined_data': combined_data,
-#     }
-#     return render(request, "dashboard.html", context)
+    return render(request, 'add_student.html', context)
 
 
 @login_required(login_url='/login')
