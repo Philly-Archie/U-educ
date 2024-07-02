@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h5 class="card-title">End Mapping</h5>
+                        <p class="card-category">Confirm your session</p>
+                    </div>
+                    <div class="card-body">
+                        <p>Are you sure you want to end the mapping with {{ mapping.studentFullName }}?</p>
+                    </div>
+                    <div class="card-footer">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">End</button>
+                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
