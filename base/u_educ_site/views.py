@@ -237,7 +237,9 @@ def editProfile(request):
 
 @login_required(login_url='/login')
 def mappings(request):
+    active_mappings = Mappings.objects.filter(sponsor=request.user, status='Accepted')
     context = {
+        'active_mappings': active_mappings,
         'page_title': "Active Sponsor's Mappings",
     }
     return render(request, "mappings.html", context)
@@ -258,10 +260,27 @@ def deleteMapRequest(request, pk):
     if request.method == 'POST':
         mapping.delete()
         messages.success(request, 'Pending Mapping Request Has Been Deleted')
-        return redirect('home')
+        return redirect('map_requests')
     
     context = {
         'mapping' : mapping,
+        'page_title': 'Delete Pending Mapping Request',
     }
 
-    return redirect(request, 'delete_map_request.html', context)
+    return render(request, 'delete_map_request.html', context)
+
+@login_required(login_url='/login')
+def endMapping(request, pk):
+    # mapping = Mappings.objects.get(id=pk)
+    mapping = get_object_or_404(Mappings, id=pk)
+    if request.method == 'POST':
+        mapping.delete()
+        messages.success(request, 'Active Mapping Request Has Been Ended')
+        return redirect('mappings')
+    
+    context = {
+        'mapping' : mapping,
+        'page_title': 'Endingg Mapping With Student',
+    }
+
+    return render(request, 'end_mapping.html', context)
