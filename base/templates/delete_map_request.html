@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h5 class="card-title">Delete Request</h5>
+                        <p class="card-category">Confirm your delete</p>
+                    </div>
+                    <div class="card-body">
+                        <p>Are you sure you want to delete the mapping request for {{ mapping.studentFullName }}?</p>
+                    </div>
+                    <div class="card-footer">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
