@@ -16,7 +16,7 @@ class Role(models.Model):
     updated = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.role
+        return f'{self.user} -> {self.role}'
     
 class SponsorPreferences(models.Model):
     firstName = models.CharField(max_length=200)
