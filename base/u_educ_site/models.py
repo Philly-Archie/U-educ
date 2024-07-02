@@ -102,10 +102,18 @@ class SponsorPreferences(models.Model):
         return (abs(rounded_average_weight))
     
 class Mappings(models.Model):
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+    )
     sponsor = models.ForeignKey(User, on_delete=models.CASCADE)
     studentFullName = models.CharField(max_length=500)
     studentEmail = models.EmailField()
-    studentPhoneNumber = models.CharField(max_length=15, blank=True, null=True)
+    studentGender = models.TextField(max_length=15, blank=True)
+    yearOfStudy = models.CharField(max_length=10, blank=True)
+    tuitionAmountPerSemester = models.CharField(max_length=20, blank=True)
+    status = models.CharField(max_length=200, null=True, choices=STATUS)
 
-    def __str__(self):
-        return f'{self.sponsor} {self.studentFullName} {self.studentEmail}'
+    def __unicode__ (self):
+        return f'{self.sponsor} {self.studentFullName}'
