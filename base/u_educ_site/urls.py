@@ -17,6 +17,7 @@ urlpatterns = [
     path('sponsor_preferences/', views.sponsorPreferences, name='sponsor_preferences'),
     path('edit_profile/', views.editProfile, name='edit_profile'),
     path('add_student/<str:pk>/', views.addStudent, name='add_student'),
+    path('delete_map_request/<str:pk>/', views.deleteMapRequest, name='delete_map_request'),
 
 
 
