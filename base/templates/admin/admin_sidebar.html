@@ -1,0 +1,49 @@
+{% load static %}
+
+    <div class="sidebar {% if inactive_sidebar %}inactive{% endif %}" data-color="white" data-active-color="danger">
+        <div class="logo">
+          <a href="{% url 'admin_dashboard' %}" class="simple-text logo-mini">
+            <div class="logo-image-small">
+              <img src="{% static 'home/img/logo-small.png' %}">
+            </div>
+          </a>
+          <a href="{% url 'admin_dashboard' %}" class="simple-text logo-normal">
+            {{request.user}} Admin
+          </a>
+        </div>
+
+        <div class="sidebar-wrapper">
+          <ul class="nav">
+            <li class="{% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+              <a href="{% url 'admin_dashboard' %}">
+                <i class="nc-icon nc-bank"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'admin_mappings' %}active{% endif %}">
+              <a href="{% url 'admin_mappings' %}">
+                <i class="nc-icon nc-money-coins"></i>
+                <p>Mappings</p>
+              </a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'admin_map_requests' %}active{% endif %}">
+              <a href="{% url 'admin_map_requests' %}">
+                <i class="fa fa-question-circle"></i>
+                <p>Mapping Requests</p>
+              </a>
+            </li>
+            <!-- <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+              <a href="{% url 'profile' %}">
+                <i class="nc-icon nc-single-02"></i>
+                <p>User Profile</p>
+              </a>
+            </li> -->
+            <li>
+              <a href="{% url 'logout' %}">
+                <i class="nc-icon nc-user-run"></i>
+                <p>Logout</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
