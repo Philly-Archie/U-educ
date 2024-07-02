@@ -10,7 +10,7 @@ from apis.models import DetailsModel, FamEducationModel, UserModel
 from django.db.models import Q
 
 from .forms import SignupForm, RoleForm, SponsorPreferencesForm, MappingsForm
-from .models import SponsorPreferences, Mappings
+from .models import SponsorPreferences, Mappings, Role
 
 # Create your views here.
 
@@ -68,7 +68,12 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect("home")
+            user_role = Role.objects.get(user=user)
+            if user_role.role == 'Sponsor':
+                return redirect("home")
+            else:
+                return redirect("admin_dashboard")
+
         else:
             messages.error(request, "No user with these details available")
 
@@ -90,6 +95,7 @@ def home(request):
         '/static/home/img/bg2.jpg',
     ]
     random_image_url = random.choice(image_urls)
+    user_role = Role.objects.get(user=request.user.id)
 
     sponsor_preferences = get_object_or_404(SponsorPreferences, user=request.user)
     users_with_details = UserModel.objects.filter(email__in=DetailsModel.objects.values('email'))
@@ -113,6 +119,7 @@ def home(request):
         #         continue
 
         combined_data.append({
+            'user_role': user_role,
             'user': user,
             'details': details_instance,
             'education': education_instance,
@@ -128,6 +135,44 @@ def home(request):
     }
 
     return render(request, 'dashboard.html', context)
+
+
+def adminDashboard(request):
+    user_role = Role.objects.get(user=request.user.id)
+
+    # Retrieve counts for students, sponsors, pending mappings, and active mappings
+    student_count = DetailsModel.objects.count()
+    sponsor_count = SponsorPreferences.objects.count()
+    pending_mappings_count = Mappings.objects.filter(status='Pending').count()
+    active_mappings_count = Mappings.objects.filter(status='Accepted').count()
+    
+    # Retrieve lists of sponsors and students
+    sponsors = SponsorPreferences.objects.all()
+ 
+    students_data = []
+    details_instances = DetailsModel.objects.all() 
+    for details_instance in details_instances:
+        student = UserModel.objects.filter(email=details_instance.email).first()
+        try:
+            education_instance = FamEducationModel.objects.get(userId=details_instance.userId)
+        except FamEducationModel.DoesNotExist:
+            education_instance = None
+        students_data.append({
+            'student': student,
+            'details': details_instance,
+            'education': education_instance,
+        })
+    context = {
+        'page_title': "Admin's Dashboard",
+        'user_role': user_role,
+        'student_count': student_count,
+        'sponsor_count': sponsor_count,
+        'pending_mappings_count': pending_mappings_count,
+        'active_mappings_count': active_mappings_count,
+        'sponsors': sponsors,
+        'students_data': students_data,
+    }
+    return render(request, 'admin/admin_dashboard.html', context)
 
 
 
@@ -246,7 +291,7 @@ def mappings(request):
 
 @login_required(login_url='/login')
 def mapRequests(request):
-    mappings = Mappings.objects.filter(sponsor=request.user)
+    mappings = Mappings.objects.filter(sponsor=request.user, status='Pending')
     context = {
         'page_title': 'Mapping Pending Requests',
         'mappings' : mappings    
@@ -284,3 +329,28 @@ def endMapping(request, pk):
     }
 
     return render(request, 'end_mapping.html', context)
+
+
+def viewSponsor(request, pk):
+    sponsor = get_object_or_404(SponsorPreferences, id=pk)
+    context = {
+        'sponsor': sponsor,
+        'page_title': "Sponsor's Details View",
+    }
+    return render(request, 'admin/view_sponsor.html', context)
+
+def viewStudent(request, pk):
+    student = get_object_or_404(UserModel, id=pk)
+    details_instance = get_object_or_404(DetailsModel, email=student.email)
+    
+    try:
+        education_instance = FamEducationModel.objects.get(userId=details_instance.userId)
+    except FamEducationModel.DoesNotExist:
+        education_instance = None
+    context = {
+        'student': student,
+        'details': details_instance,
+        'education': education_instance,
+        'page_title': 'View Student Detials',
+    }
+    return render(request, 'admin/view_student.html', context)
