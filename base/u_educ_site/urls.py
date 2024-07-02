@@ -18,6 +18,7 @@ urlpatterns = [
     path('edit_profile/', views.editProfile, name='edit_profile'),
     path('add_student/<str:pk>/', views.addStudent, name='add_student'),
     path('delete_map_request/<str:pk>/', views.deleteMapRequest, name='delete_map_request'),
+    path('end_mapping/<str:pk>/', views.endMapping, name='end_mapping'),
 
 
 
