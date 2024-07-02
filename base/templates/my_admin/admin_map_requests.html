@@ -1,0 +1,61 @@
+{% extends 'my_admin/admin_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <div class="card card-plain">
+              <div class="card-header">
+                <h4 class="card-title"> Pending Mapping Requests</h4>
+                <p class="card-category"> Below are the pending map requests from sponsors</p>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>Sponsor Name</th>
+                                <th>Student Name</th>
+                                <th>Gender</th>
+                                <th>Year Of Study</th>
+                                <th>Tution Amount</th>   
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mapping in pending_mappings %}
+                            <tr>
+                                <td>{{ mapping.sponsor }}</td>
+                                <td>{{ mapping.studentFullName }}</td>
+                                <td>{{ mapping.studentGender }}</td>
+                                <td>{{ mapping.yearOfStudy }}</td>
+                                <td>{{ mapping.tuitionAmountPerSemester }}</td>
+                                <td>{{ mapping.status }}</td>
+                                <td>
+                                  <a href="{% url 'accept_mapping' mapping.id %}">
+                                    <button class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Accept</button>
+                                  </a>
+                                  <a href="{% url 'deny_mapping' mapping.id %}">
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Deny</button>
+                                  </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+{% endblock %}

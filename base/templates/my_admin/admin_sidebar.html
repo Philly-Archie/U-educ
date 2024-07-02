@@ -1,5 +1,5 @@
 {% load static %}
-
+{% if request.user.role != 'Sponsor' %}
     <div class="sidebar {% if inactive_sidebar %}inactive{% endif %}" data-color="white" data-active-color="danger">
         <div class="logo">
           <a href="{% url 'admin_dashboard' %}" class="simple-text logo-mini">
@@ -47,3 +47,4 @@
           </ul>
         </div>
       </div>
+{% endif %}

@@ -1,0 +1,56 @@
+{% extends 'my_admin/admin_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <div class="card card-plain">
+              <div class="card-header">
+                <h4 class="card-title"> Active Mappings of Sponsors & Students</h4>
+                <p class="card-category"> Below are the pending map requests from sponsors</p>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>Sponsor Name</th>
+                                <th>Student Name</th>
+                                <th>Gender</th>
+                                <th>Year Of Study</th>
+                                <th>Tution Amount</th>   
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mapping in active_mappings %}
+                            <tr>
+                                <td>{{ mapping.sponsor }}</td>
+                                <td>{{ mapping.studentFullName }}</td>
+                                <td>{{ mapping.studentGender }}</td>
+                                <td>{{ mapping.yearOfStudy }}</td>
+                                <td>{{ mapping.tuitionAmountPerSemester }}</td>
+                                <td>{{ mapping.status }}</td>
+                                <td>
+                                    <a href="#"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+{% endblock %}

@@ -22,11 +22,13 @@ urlpatterns = [
 
 
     # Admin urls
-    path('admin_dashboard/', views.adminDashboard, name='admin_dashboard'),
-    path('view_sponsor_details/<str:pk>/', views.viewSponsor, name='admin_view_sponsor'),
-    path('view_student_details/<str:pk>/', views.viewStudent, name='admin_view_student'),
-    path('admin_mappings/', views.mappings, name='admin_mappings'),
-    path('admin_map_requests/', views.mapRequests, name='admin_map_requests'),
+    path('my_admin/admin_dashboard/', views.adminDashboard, name='admin_dashboard'),
+    path('my_admin/view_sponsor_details/<str:pk>/', views.viewSponsor, name='admin_view_sponsor'),
+    path('my_admin/view_student_details/<str:pk>/', views.viewStudent, name='admin_view_student'),
+    path('my_admin/admin_mappings/', views.adminMappings, name='admin_mappings'),
+    path('my_admin/admin_map_requests/', views.adminMappingRequests, name='admin_map_requests'),
+    path('my_admin/accept_mapping/<str:pk>/', views.acceptMapping, name='accept_mapping'),
+    path('my_admin/deny_mapping/<str:pk>/', views.denyMapping, name='deny_mapping'),
 
 
 

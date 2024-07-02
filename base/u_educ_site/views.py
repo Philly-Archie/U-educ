@@ -172,7 +172,7 @@ def adminDashboard(request):
         'sponsors': sponsors,
         'students_data': students_data,
     }
-    return render(request, 'admin/admin_dashboard.html', context)
+    return render(request, 'my_admin/admin_dashboard.html', context)
 
 
 
@@ -316,7 +316,6 @@ def deleteMapRequest(request, pk):
 
 @login_required(login_url='/login')
 def endMapping(request, pk):
-    # mapping = Mappings.objects.get(id=pk)
     mapping = get_object_or_404(Mappings, id=pk)
     if request.method == 'POST':
         mapping.delete()
@@ -337,7 +336,7 @@ def viewSponsor(request, pk):
         'sponsor': sponsor,
         'page_title': "Sponsor's Details View",
     }
-    return render(request, 'admin/view_sponsor.html', context)
+    return render(request, 'my_admin/view_sponsor.html', context)
 
 def viewStudent(request, pk):
     student = get_object_or_404(UserModel, id=pk)
@@ -353,4 +352,36 @@ def viewStudent(request, pk):
         'education': education_instance,
         'page_title': 'View Student Detials',
     }
-    return render(request, 'admin/view_student.html', context)
+    return render(request, 'my_admin/view_student.html', context)
+
+
+
+def adminMappings(request):
+    active_mappings = Mappings.objects.filter(status='Accepted')
+
+    context = {
+        'active_mappings': active_mappings,
+        'page_title': 'Active Mappings of Students & Sponsors',
+    }
+    return render(request, 'my_admin/admin_mapping.html', context)
+
+def adminMappingRequests(request):
+    pending_mappings = Mappings.objects.filter(status='Pending')
+
+    context = {
+        'pending_mappings': pending_mappings,
+        'page_title': 'Pending Mappings of Students & Sponsors',
+    }
+    return render(request, 'my_admin/admin_map_requests.html', context)
+
+def acceptMapping(request, pk):
+    mapping = get_object_or_404(Mappings, id=pk)
+    mapping.status = 'Accepted'
+    mapping.save()
+    return redirect('admin_dashboard')
+
+def denyMapping(request, pk):
+    mapping = get_object_or_404(Mappings, id=pk)
+    mapping.status = 'Denied'
+    mapping.save()
+    return redirect('admin_dashboard')
