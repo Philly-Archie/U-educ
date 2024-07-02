@@ -21,6 +21,14 @@ urlpatterns = [
     path('end_mapping/<str:pk>/', views.endMapping, name='end_mapping'),
 
 
+    # Admin urls
+    path('admin_dashboard/', views.adminDashboard, name='admin_dashboard'),
+    path('view_sponsor_details/<str:pk>/', views.viewSponsor, name='admin_view_sponsor'),
+    path('view_student_details/<str:pk>/', views.viewStudent, name='admin_view_student'),
+    path('admin_mappings/', views.mappings, name='admin_mappings'),
+    path('admin_map_requests/', views.mapRequests, name='admin_map_requests'),
+
+
 
     # path("reset_password/", auth_views.PasswordResetView.as_view(
     #    template_name="auth/reset_password.html"), name="reset_password"),
