@@ -1,0 +1,180 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block content %}
+  {% if user_role.role != 'Sponsor' %}
+    <div class="main-panel">
+        <div class="content">
+          <div class="row">
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-user-circle text-warning"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Student No</p>
+                          <p class="card-title">{{ student_count }}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <i class="fa fa-user"></i>
+                      Student Number
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="nc-icon nc-money-coins text-success"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Sponsor No</p>
+                          <p class="card-title">{{ sponsor_count }}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <i class="nc-icon nc-money-coins"></i>
+                      Total Sponsors
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-hourglass-half text-danger"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Pending</p>
+                          <p class="card-title">{{ pending_mappings_count }}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <i class="fa fa-hourglass"></i>
+                      Pending Mappings
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="nc-icon nc-favourite-28 text-primary"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Active</p>
+                          <p class="card-title">{{ active_mappings_count }}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <i class="fa fa-bell"></i>
+                      Active Mappings
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title">Sponsors</h4>
+                    <p class="card-category">List of all sponsors</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Actions</th>
+                        </thead>
+                        <tbody>
+                          {% for sponsor in sponsors %}
+                            <tr>
+                              <td>{{ sponsor.firstName }}</td>
+                              <td>{{ sponsor.email }}</td>
+                              <td>
+                                <a href="{% url 'admin_view_sponsor' sponsor.id %}" class="btn btn-info btn-sm">View</a>
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title">Students</h4>
+                    <p class="card-category">List of all students</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Actions</th>
+                        </thead>
+                        <tbody>
+                          {% for student_data in students_data %}
+                            <tr>
+                              <td>{{ student_data.student.fullName }}</td>
+                              <td>{{ student_data.student.email }}</td>
+                              <td>
+                                <a href="{% url 'admin_view_student' student_data.student.id %}" class="btn btn-info btn-sm">View</a>
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+  {% endif %}
+{% endblock %}
