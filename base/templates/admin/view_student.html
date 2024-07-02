@@ -1,0 +1,288 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{ page_title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="#">
+                            {% csrf_token %}
+                            <input type="hidden" name="student_id" value="{{ student.id }}">
+                            <div class="text-center mb-3">
+                                <div class=" overflow-hidden mx-auto" style="width: 200px; height: 200px;">
+                                    {% if details.profileImage %}
+                                        <img src="#" alt="Profile Image" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                                    {% else %}
+                                        <div class="bg-light d-flex justify-content-center align-items-center" style="width: 100%; height: 100%;">
+                                            <span class="text-secondary">No Image</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="student_name">Student Name</label>
+                                <input type="text" id="student_name" class="form-control" value="{{ student.fullName }}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="student_email">Email</label>
+                                <input type="text" id="student_email" class="form-control" value="{{ student.email }}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="student_phone">Phone Number</label>
+                                <input type="text" id="student_phone" class="form-control" value="{{ student.phoneNumber }}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="student_age">Age</label>
+                                <input type="text" id="student_age" class="form-control" value="{{ details.age }}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="student_gender">Gender</label>
+                                <input type="text" id="student_gender" class="form-control" value="{{ details.gender }}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="student_address">Address</label>
+                                <input type="text" id="student_address" class="form-control" value="{{ details.address }}" readonly>
+                            </div>
+
+                            {% if education %}
+                                {% if education.fatherStatus %}
+                                <div class="form-group">
+                                    <label for="father_status">Father Status</label>
+                                    <input type="text" id="father_status" class="form-control" value="{{ education.fatherStatus }}" readonly>
+                                </div>
+                                {% endif %}
+
+                                {% if education.fatherSurname %}
+                                <div class="form-group">
+                                    <label for="father_surname">Father Surname</label>
+                                    <input type="text" id="father_surname" class="form-control" value="{{ education.fatherSurname }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.fatherGivenName %}
+                                <div class="form-group">
+                                    <label for="father_given_name">Father Given Name</label>
+                                    <input type="text" id="father_given_name" class="form-control" value="{{ education.fatherGivenName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.motherStatus %}
+                                <div class="form-group">
+                                    <label for="mother_status">Mother Status</label>
+                                    <input type="text" id="mother_status" class="form-control" value="{{ education.motherStatus }}" readonly>
+                                </div>
+                                {% endif%}
+                                {% if education.motherSurname %}
+                                <div class="form-group">
+                                    <label for="mother_surname">Mother Surname</label>
+                                    <input type="text" id="mother_surname" class="form-control" value="{{ education.motherSurname }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.motherGivenName %}
+                                <div class="form-group">
+                                    <label for="mother_given_name">Mother Given Name</label>
+                                    <input type="text" id="mother_given_name" class="form-control" value="{{ education.motherGivenName }}" readonly>
+                                </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label for="guardian_surname">Guardian Surname</label>
+                                    <input type="text" id="guardian_surname" class="form-control" value="{{ education.guardianSurname }}" readonly>
+                                </div>
+                                {% if education.guardianGivenName %}
+                                <div class="form-group">
+                                    <label for="guardian_given_name">Guardian Given Name</label>
+                                    <input type="text" id="guardian_given_name" class="form-control" value="{{ education.guardianGivenName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.studentStatus %}
+                                <div class="form-group">
+                                    <label for="student_status">Student Status</label>
+                                    <input type="text" id="student_status" class="form-control" value="{{ education.studentStatus }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.regNo %}
+                                <div class="form-group">
+                                    <label for="reg_no">Registration Number</label>
+                                    <input type="text" id="reg_no" class="form-control" value="{{ education.regNo }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.studentNo %}
+                                <div class="form-group">
+                                    <label for="student_no">Student Number</label>
+                                    <input type="text" id="student_no" class="form-control" value="{{ education.studentNo }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.courseName %}
+                                <div class="form-group">
+                                    <label for="course_name">Course Name</label>
+                                    <input type="text" id="course_name" class="form-control" value="{{ education.courseName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.college %}
+                                <div class="form-group">
+                                    <label for="college">College</label>
+                                    <input type="text" id="college" class="form-control" value="{{ education.college }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.artsOrSciences %}
+                                <div class="form-group">
+                                    <label for="arts_or_sciences">Arts or Sciences</label>
+                                    <input type="text" id="arts_or_sciences" class="form-control" value="{{ education.artsOrSciences }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.yearOfStudy %}
+                                <div class="form-group">
+                                    <label for="year_of_study">Year of Study</label>
+                                    <input type="text" id="year_of_study" class="form-control" value="{{ education.yearOfStudy }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.currentCGPA %}
+                                <div class="form-group">
+                                    <label for="current_cgpa">Current CGPA</label>
+                                    <input type="text" id="current_cgpa" class="form-control" value="{{ education.currentCGPA }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.tuitionAmountPerSemester %}
+                                <div class="form-group">
+                                    <label for="tuition_amount">Tuition Amount per Semester</label>
+                                    <input type="text" id="tuition_amount" class="form-control" value="{{ education.tuitionAmountPerSemester }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.schoolName %}
+                                <div class="form-group">
+                                    <label for="school_name">School Name</label>
+                                    <input type="text" id="school_name" class="form-control" value="{{ education.schoolName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.schoolLocation %}
+                                <div class="form-group">
+                                    <label for="school_location">School Location</label>
+                                    <input type="text" id="school_location" class="form-control" value="{{ education.schoolLocation }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.yearOfSitting %}
+                                <div class="form-group">
+                                    <label for="year_of_sitting">Year of Sitting</label>
+                                    <input type="text" id="year_of_sitting" class="form-control" value="{{ education.yearOfSitting }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectOneName %}
+                                <div class="form-group">
+                                    <label for="subject_one_name">Subject One Name</label>
+                                    <input type="text" id="subject_one_name" class="form-control" value="{{ education.subjectOneName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectOneGrade %}
+                                <div class="form-group">
+                                    <label for="subject_one_grade">Subject One Grade</label>
+                                    <input type="text" id="subject_one_grade" class="form-control" value="{{ education.subjectOneGrade }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectOnePoints %}
+                                <div class="form-group">
+                                    <label for="subject_one_points">Subject One Points</label>
+                                    <input type="text" id="subject_one_points" class="form-control" value="{{ education.subjectOnePoints }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectTwoName %}
+                                <div class="form-group">
+                                    <label for="subject_two_name">Subject Two Name</label>
+                                    <input type="text" id="subject_two_name" class="form-control" value="{{ education.subjectTwoName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectTwoGrade %}
+                                <div class="form-group">
+                                    <label for="subject_two_grade">Subject Two Grade</label>
+                                    <input type="text" id="subject_two_grade" class="form-control" value="{{ education.subjectTwoGrade }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectTwoPoints %}
+                                <div class="form-group">
+                                    <label for="subject_two_points">Subject Two Points</label>
+                                    <input type="text" id="subject_two_points" class="form-control" value="{{ education.subjectTwoPoints }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectThreeName %}
+                                <div class="form-group">
+                                    <label for="subject_three_name">Subject Three Name</label>
+                                    <input type="text" id="subject_three_name" class="form-control" value="{{ education.subjectThreeName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectThreeGrade %}
+                                <div class="form-group">
+                                    <label for="subject_three_grade">Subject Three Grade</label>
+                                    <input type="text" id="subject_three_grade" class="form-control" value="{{ education.subjectThreeGrade }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subjectThreePoints %}
+                                <div class="form-group">
+                                    <label for="subject_three_points">Subject Three Points</label>
+                                    <input type="text" id="subject_three_points" class="form-control" value="{{ education.subjectThreePoints }}" readonly>
+                                </div>  
+                                {% endif %}
+                                {% if education.subsidiaryOneName %}
+                                <div class="form-group">
+                                    <label for="subsidiary_one_name">Subsidiary One Name</label>
+                                    <input type="text" id="subsidiary_one_name" class="form-control" value="{{ education.subsidiaryOneName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subsidiaryOneGrade %}
+                                <div class="form-group">
+                                    <label for="subsidiary_one_grade">Subsidiary One Grade</label>
+                                    <input type="text" id="subsidiary_one_grade" class="form-control" value="{{ education.subsidiaryOneGrade }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subsidiaryOnePoints %}
+                                <div class="form-group">
+                                    <label for="subsidiary_one_points">Subsidiary One Points</label>
+                                    <input type="text" id="subsidiary_one_points" class="form-control" value="{{ education.subsidiaryOnePoints }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subsidiaryTwoName %}
+                                <div class="form-group">
+                                    <label for="subsidiary_two_name">Subsidiary Two Name</label>
+                                    <input type="text" id="subsidiary_two_name" class="form-control" value="{{ education.subsidiaryTwoName }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subsidiaryTwoGrade %}
+                                <div class="form-group">
+                                    <label for="subsidiary_two_grade">Subsidiary Two Grade</label>
+                                    <input type="text" id="subsidiary_two_grade" class="form-control" value="{{ education.subsidiaryTwoGrade }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.subsidiaryTwoPoints %}
+                                <div class="form-group">
+                                    <label for="subsidiary_two_points">Subsidiary Two Points</label>
+                                    <input type="text" id="subsidiary_two_points" class="form-control" value="{{ education.subsidiaryTwoPoints }}" readonly>
+                                </div>
+                                {% endif %}
+                                {% if education.totalPoints %}
+                                <div class="form-group">
+                                    <label for="total_points">Total Points</label>
+                                    <input type="text" id="total_points" class="form-control" value="{{ education.totalPoints }}" readonly>
+                                </div>
+                                {% endif %}
+                                
+                            {% endif %}
+
+                            <div class="form-group">
+                                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Go Back</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
