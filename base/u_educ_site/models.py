@@ -115,5 +115,5 @@ class Mappings(models.Model):
     tuitionAmountPerSemester = models.CharField(max_length=20, blank=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
 
-    def __unicode__ (self):
-        return f'{self.sponsor} {self.studentFullName}'
+    def __str__ (self):
+        return f'{self.sponsor} -> {self.studentFullName}'
