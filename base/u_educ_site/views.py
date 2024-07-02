@@ -9,8 +9,8 @@ from django.utils.text import slugify
 from apis.models import DetailsModel, FamEducationModel, UserModel 
 from django.db.models import Q
 
-from .forms import SignupForm, RoleForm, SponsorPreferencesForm
-from .models import SponsorPreferences
+from .forms import SignupForm, RoleForm, SponsorPreferencesForm, MappingsForm
+from .models import SponsorPreferences, Mappings
 
 # Create your views here.
 
@@ -143,9 +143,24 @@ def addStudent(request, pk):
         education_instance = None
 
     if request.method == 'POST':
-        # Here you can perform actions to add the student
-        # For example, you might create a relationship between the sponsor and the student
-        # sponsor_preferences.students.add(student) # or any other relevant action
+        student_full_name = student.fullName
+        student_email = student.email
+        student_gender = details_instance.gender if details_instance.gender else ''
+        year_of_study = education_instance.yearOfStudy if education_instance and education_instance.yearOfStudy else ''
+        tuition_amount_per_semester = education_instance.tuitionAmountPerSemester if education_instance and education_instance.tuitionAmountPerSemester else ''
+
+        mapping = Mappings(
+            sponsor=request.user,
+            studentFullName=student_full_name,
+            studentEmail=student_email,
+            studentGender=student_gender,
+            yearOfStudy=year_of_study,
+            tuitionAmountPerSemester=tuition_amount_per_semester,
+            status='Pending'
+        )
+        mapping.save()
+
+        messages.success(request, 'Student has been added successfully.')
         return redirect('home')
 
     context = {
@@ -222,14 +237,31 @@ def editProfile(request):
 
 @login_required(login_url='/login')
 def mappings(request):
-    context ={
+    context = {
         'page_title': "Active Sponsor's Mappings",
     }
     return render(request, "mappings.html", context)
 
 @login_required(login_url='/login')
 def mapRequests(request):
+    mappings = Mappings.objects.filter(sponsor=request.user)
     context = {
-        'page_title': 'Mapping Pending Requests'
+        'page_title': 'Mapping Pending Requests',
+        'mappings' : mappings    
     }
     return render(request, "map_requests.html", context)
+
+@login_required(login_url='/login')
+def deleteMapRequest(request, pk):
+    # mapping = Mappings.objects.get(id=pk)
+    mapping = get_object_or_404(Mappings, id=pk)
+    if request.method == 'POST':
+        mapping.delete()
+        messages.success(request, 'Pending Mapping Request Has Been Deleted')
+        return redirect('home')
+    
+    context = {
+        'mapping' : mapping,
+    }
+
+    return redirect(request, 'delete_map_request.html', context)
