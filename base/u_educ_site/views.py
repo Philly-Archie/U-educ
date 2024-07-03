@@ -96,7 +96,9 @@ def home(request):
     ]
     random_image_url = random.choice(image_urls)
     user_role = Role.objects.get(user=request.user.id)
-
+    pending_mappings_count = Mappings.objects.filter(status='Pending').count()
+    active_mappings_count = Mappings.objects.filter(status='Accepted').count()
+    ended_mapping_count = Mappings.objects.filter(status='Rejected').count()
     sponsor_preferences = get_object_or_404(SponsorPreferences, user=request.user)
     users_with_details = UserModel.objects.filter(email__in=DetailsModel.objects.values('email'))
 
@@ -132,6 +134,9 @@ def home(request):
         'random_image_url': random_image_url,
         'page_title': "Sponsor's Dashboard",
         'combined_data': combined_data,
+        'pending_mappings_count' : pending_mappings_count,
+        'active_mappings_count' : active_mappings_count,
+        'ended_mapping_count': ended_mapping_count,
     }
 
     return render(request, 'dashboard.html', context)
@@ -382,6 +387,6 @@ def acceptMapping(request, pk):
 
 def denyMapping(request, pk):
     mapping = get_object_or_404(Mappings, id=pk)
-    mapping.status = 'Denied'
+    mapping.status = 'Rejected'
     mapping.save()
     return redirect('admin_dashboard')

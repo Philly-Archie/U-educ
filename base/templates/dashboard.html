@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-  {% if user_role.role == 'Sponsor' %}
+
     <div class="main-panel">
       
       <div class="content">
@@ -19,7 +19,7 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">My Mappings</p>
-                      <p class="card-title">0<p>
+                      <p class="card-title">{{ active_mappings_count }}<p>
                     </div>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Pending</p>
-                      <p class="card-title">0<p>
+                      <p class="card-title">{{ pending_mappings_count}}<p>
                     </div>
                   </div>
                 </div>
@@ -96,8 +96,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Badges</p>
-                      <p class="card-title">0<p>
+                      <p class="card-category">Ended</p>
+                      <p class="card-title"> {{ ended_mapping_count }} <p>
                     </div>
                   </div>
                 </div>
@@ -106,7 +106,7 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-bell"></i>
-                  Your Badges
+                  Mappings That Ended
                 </div>
               </div>
             </div>
@@ -159,5 +159,4 @@
       </div>
     </div>
 
-  {% endif %}
 {% endblock %}
